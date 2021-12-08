@@ -16,5 +16,6 @@
         game.load.atlas('halle', './asset/halle/phaser-json-array/halle.png', './asset/halle/phaser-json-array/halle.json');
         game.load.image('star', './asset/collectable/star.png');
         game.load.image('token','./asset/collectable/token.png');
+        game.load.image('mushroom','./asset/collectable/mushroom.png')
     };
 })(window);
