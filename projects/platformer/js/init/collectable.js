@@ -10,7 +10,8 @@
         steve: {assetKey: 'steve', points: 30},
         grace: {assetKey: 'grace', points: 40},
         kennedi: {assetKey: 'kennedi', points: 50},
-        star: {assetKey: 'star', points: 10}
+        star: {assetKey: 'star', points: 10},
+        token: {assetKey: 'token', points: 20}
     };
     
     /**
@@ -38,7 +39,7 @@
         // ALL YOUR CODE GOES BELOW HERE ///////////////////////////////////////
                  
         createCollectable(type.grace, 550, 50, 6, 0.7);
-        createCollectable(type.max,700,250,6,0.7);
+        createCollectable(type.token,700,250,6,0.7);
         createCollectable(type.star,400,350,6,0.7,);
         
         // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////

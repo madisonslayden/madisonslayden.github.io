@@ -15,5 +15,6 @@
         game.load.image('max', './asset/collectable/max-head.png');
         game.load.atlas('halle', './asset/halle/phaser-json-array/halle.png', './asset/halle/phaser-json-array/halle.json');
         game.load.image('star', './asset/collectable/star.png');
+        game.load.image('token','./asset/collectable/token.png');
     };
 })(window);
