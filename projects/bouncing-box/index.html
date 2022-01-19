@@ -18,6 +18,7 @@
 		}
 		.board{
 			height: 100vh;
+			background: center url('images/background image.jpg');
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -61,11 +62,11 @@
 			
 			// TODO 2 - Variable declarations 
 			var boardHeight = jQuery(window).height(); 
-			var positionX = 0 + 10;
+			var positionX = 0;
 			var points = 0;
 			var speed = 10;
-			var positionY;
-			var speedY;
+			var positionY = 0;
+			var speedY = 10;
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -77,8 +78,15 @@
 				positionX = positionX + speed;
 				if (positionX > boardWidth) {
 				speed = -speed;	
-				} if (positionX < 0) {
+				} else if (positionX < 0) {
 				speed = -speed;	
+				}
+				
+				positionY = positionY + speedY;
+				if (positionY > boardHeight) {
+				speedY = -speedY;	
+				} else if (positionY < 0) {
+				speedY = -speedY;	
 				}
 			};
 
@@ -90,13 +98,21 @@
 			function handleBoxClick() {
 				changeBoxText(points);
 				positionX = 0;	
-				speed = speed + 3;
+				
+				if (speed > 0){
+					speed = speed + 3;
+				} else {
+					speed = speed - 3;
+				}
+				if (speedY > 0){
+					speedY = speedY + 3;
+				}else {
+					speedY = speedY - 3;
+				}
 				points += 1;
+				positionY = 0;
+				
 			};
-		function getRandomColor() {
-			box.css('background-color', colorStr);
-
-		};
 		})();
 	</script>
 </body>
