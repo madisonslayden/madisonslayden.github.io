@@ -59,9 +59,9 @@ var init = function (window) {
         */
         function update() {
             // TODO 4 : Update the circle's position //
-            // This is not needed anylonger because it is inserted in the loop
+                // This is not needed anylonger because it is inserted in the loop
             // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
-           // This is not needed anylonger because it is inserted in the loop
+                // This is not needed anylonger because it is inserted in the loop
             // TODO 9 : Iterate over the array
             for (var i = 0; i < circles.length; i++){
                 var eachCircle = circles[i];
