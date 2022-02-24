@@ -26,7 +26,8 @@ var background = function (window) {
         var background;
         
         // ANIMATION VARIABLES HERE:
-        
+        var tree;
+        var buildings = [];
      
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -36,17 +37,43 @@ var background = function (window) {
             // TODO: 2 - Part 2
             // this fills the background with a obnoxious yellow
             // you should modify this to suit your game
-            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
-            background.addChild(backgroundFill);
+            var backgroundFill = draw.rect(canvasWidth,groundY,'#FFA490'); //creates a variable called backgroundFill and stores a rectangle that acts as our background
+            background.addChild(backgroundFill); //adds the background to the cavas so we can see it
             
             // TODO: 3 - Add a moon and starfield
+           
+            var moon = draw.bitmap('img/moon.png'); //a variable moon that hold the bitmap drawing of the moon
+            moon.x = canvasWidth - 300; //holds the x value (left to right) 
+            moon.y = groundY - 450; //holds the y value (up and down)
+            moon.scaleX = 0.5; //changes the x scale of the moon
+            moon.scaleY = 0.5; //changes the y scale of the moon
+            background.addChild(moon); //adds the moon to the background
             
+            // everytime the loops runs it craets a circle with a random x and y respective to the canvas and is added to the background
+            for (var i =0; i <= 100; i++ ){
+                var circle = draw.circle(10,'white','LightGray',2); //creates a variable called circle that holds each circle
+                circle.x = canvasWidth*Math.random(); //multiplies cavasWidth * a random decimal between .1 and .99 and assigns it the circle.x
+                circle.y = groundY*Math.random(); //multiplies groundY * with a random decimal between .1 and .99 and assigns it the circle.y
+                background.addChild(circle); //adds the circle to the background
+            }
             
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            
+            // this is before TODO 4 because the buildings are in the background
+             //everytime this loop runs, it creates a building with an x and y value and pushes it to the buildings array
+            for(var i = 0; i < 10; i++) {
+                var buildingHeight = 300; //declare a variable called buildingHeight that holds the height of the building in pixels
+                var building = draw.rect(75,buildingHeight,'LightGray','Black',1); //declares a variable called building which will hold each building
+                building.x = 200*i; //adds 200 pixels to the x value every time the loop runs
+                building.y = groundY-buildingHeight; //sets the building y position by subtracting the height of the building from groundY
+                background.addChild(building); //adds the building to the background so we can see it
+                buildings.push(building); //push the building data to the buildings aray and store it as an index
+            }
             
             // TODO 4: Part 1 - Add a tree
-            
+            tree = draw.bitmap('img/tree.png');
+            tree.x = canvasWidth - 300;
+            tree.y = groundY - 235;
+            background.addChild(tree);
             
         } // end of render function - DO NOT DELETE
         
@@ -61,6 +88,11 @@ var background = function (window) {
             
             // TODO 4: Part 2 - Move the tree!
             
+            tree.x = tree.x - 1; //takes the current value of tree.xand subtractys 1 pixel 60/seconds to move the tree to the left
+            //if the tree's x value is less than -200 pizels then reassign canvasWidth to the tree's x position
+            if(tree.x < -200) {
+                tree.x = canvasWidth;
+            }
             
             // TODO 5: Part 2 - Parallax
             
