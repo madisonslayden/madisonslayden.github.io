@@ -51,7 +51,7 @@ var background = function (window) {
             
             // everytime the loops runs it craets a circle with a random x and y respective to the canvas and is added to the background
             for (var i =0; i <= 100; i++ ){
-                var circle = draw.circle(10,'white','LightGray',2); //creates a variable called circle that holds each circle
+                var circle = draw.circle(3,'white','LightGray',2); //creates a variable called circle that holds each circle
                 circle.x = canvasWidth*Math.random(); //multiplies cavasWidth * a random decimal between .1 and .99 and assigns it the circle.x
                 circle.y = groundY*Math.random(); //multiplies groundY * with a random decimal between .1 and .99 and assigns it the circle.y
                 background.addChild(circle); //adds the circle to the background
@@ -61,10 +61,12 @@ var background = function (window) {
             // this is before TODO 4 because the buildings are in the background
              //everytime this loop runs, it creates a building with an x and y value and pushes it to the buildings array
             for(var i = 0; i < 10; i++) {
+                var buildingHeights = [300, 200, 100, 400, 350];
+                var colors = ["red", "blue", "grey", "black", "purple"]
                 var buildingHeight = 300; //declare a variable called buildingHeight that holds the height of the building in pixels
-                var building = draw.rect(75,buildingHeight,'LightGray','Black',1); //declares a variable called building which will hold each building
-                building.x = 200*i; //adds 200 pixels to the x value every time the loop runs
-                building.y = groundY-buildingHeight; //sets the building y position by subtracting the height of the building from groundY
+                var building = draw.rect(75, buildingHeights[i],colors[i],'Black',1); //declares a variable called building which will hold each building
+                building.x = 500 + 200*i; //adds 200 pixels to the x value every time the loop runs
+                building.y = groundY-buildingHeights[i]; //sets the building y position by subtracting the height of the building from groundY
                 background.addChild(building); //adds the building to the background so we can see it
                 buildings.push(building); //push the building data to the buildings aray and store it as an index
             }
@@ -86,8 +88,8 @@ var background = function (window) {
             var canvasHeight = app.canvas.height;
             var groundY = ground.y;
             
-            // TODO 4: Part 2 - Move the tree!
-            
+            // TODO 4: Part 2 - Move the tree
+
             tree.x = tree.x - 1; //takes the current value of tree.xand subtractys 1 pixel 60/seconds to move the tree to the left
             //if the tree's x value is less than -200 pizels then reassign canvasWidth to the tree's x position
             if(tree.x < -200) {
@@ -95,7 +97,12 @@ var background = function (window) {
             }
             
             // TODO 5: Part 2 - Parallax
-            
+            for (var i = 0; i < buildings.length; i++){
+                buildings[i].x = buildings[i].x - 2;
+                if(buildings[i].x < 0) {
+                    buildings[i].x = canvasWidth;
+                }
+            }
 
         } // end of update function - DO NOT DELETE
         
