@@ -16,17 +16,17 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
-                { "type": "sawblade", "x": 400, "y": groundY - 50 },
-                { "type": "sawblade", "x": 600, "y": groundY - 50},
-                { "type": "sawblade", "x": 800, "y": groundY - 50},
+            {"type": "sawblade", "x": 400, "y": groundY - 50},
+            { "type": "sawblade", "x": 600, "y": groundY - 50},
+            { "type": "sawblade", "x": 800, "y": groundY - 50},
+            
+            { "type": "enemy", "x": 500, "y": groundY - 50 },
+            { "type": "enemy", "x": 700, "y": groundY - 50},
+            { "type": "enemy", "x": 900, "y": groundY - 50},
 
-                { "type": "enemy", "x": 500, "y": groundY - 50 },
-                { "type": "enemy", "x": 700, "y": groundY - 50},
-                { "type": "enemy", "x": 900, "y": groundY - 50},
-
-                { "type": "reward", "x": 200, "y": groundY - 50 },
-                { "type": "reward", "x": 300, "y": groundY - 50},
-                { "type": "reward", "x": 1000, "y": groundY - 50},
+            { "type": "reward", "x": 200, "y": groundY - 50 },
+            { "type": "reward", "x": 300, "y": groundY - 50},
+            { "type": "reward", "x": 1000, "y": groundY - 50},
             ]
         };
         window.levelData = levelData;
@@ -48,16 +48,16 @@ var level01 = function (window) {
             sawBladeHitZone.addChild(obstacleImage); //adds the image to the hitzone so you can see it.
             obstacleImage.x = -25; //lines up the x of the image with the hitzone
             obstacleImage.y = -25; //lines up the y of the image with the hitzone
-            sawBladeHitZone.rotationalVelocity = 10;
+            sawBladeHitZone.rotationalVelocity = 10; // rotate the enemy image by 10 pixels
         }
 
 
         function createEnemy(x, y){
             var enemy = game.createGameItem('enemy',25);// creates the enemy game item and stores it in the variable enemy
-            var redSquare = draw.rect(50,50,'red'); // draws a red sqaure and stores it in variable redSquare
-            redSquare.x = -25; // align the square with the hitzone x
-            redSquare.y = -25; // align the square with the hitzone y
-            enemy.addChild(redSquare); // adds the enemy 
+            var enemyImage = draw.bitmap('img/Kunai Knife.png'); // draws the image and stores it in the variable enemyImage
+            enemyImage.x = -25; // align the image with the hitzone x
+            enemyImage.y = -25; // align the image with the hitzone y
+            enemy.addChild(enemyImage); // adds the enemy 
             enemy.x = x; //the x value of the enemy 
             enemy.y = y; //the x value of the enemy 
             game.addGameItem(enemy); // adds the enemy
@@ -79,19 +79,18 @@ var level01 = function (window) {
         
         function createReward(x, y){
             var reward = game.createGameItem('reward',25);// creates the reward game item and stores it in the variable reward
-            var blueSquare = draw.rect(50,50,'blue'); // draws a blue sqaure and stores it in variable blueSquare
-            blueSquare.x = -25; // align the square with the hitzone x
-            blueSquare.y = -25; // align the square with the hitzone y
-            reward.addChild(blueSquare); // adds the reward 
+            var rewardImage = draw.bitmap('img/pixel-heart.png'); //draws the image and stores it in the variable rewardImage
+            rewardImage.x = -25; //the x value of the reward
+            rewardImage.y = -25; //the y value of the reward
+            reward.addChild(rewardImage); // adds the reward 
             reward.x = x; //the x value of the reward 
             reward.y = y; //the x value of the reward 
             game.addGameItem(reward); // adds the reward
             reward.velocityX = -1; // move the reward 1 pixel to the left
-            reward.rotationalVelocity = 10; // rotate the reward image by 10 pixels
 
             //this function detects if the reward collides with Halle and executes health decrease
             reward.onPlayerCollision = function() {
-                game.changeIntegrity(10); //decreases your health
+                game.changeIntegrity(50); //decreases your health
                 console.log('The reward has hit Halle');
                 reward.shrink(); //when hits Halle reward disapears or shrinks
             };

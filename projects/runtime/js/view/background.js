@@ -37,7 +37,7 @@ var background = function (window) {
             // TODO: 2 - Part 2
             // this fills the background with a obnoxious yellow
             // you should modify this to suit your game
-            var backgroundFill = draw.rect(canvasWidth,groundY,'#FFA490'); //creates a variable called backgroundFill and stores a rectangle that acts as our background
+            var backgroundFill = draw.rect(canvasWidth,groundY,'#262E66'); //creates a variable called backgroundFill and stores a rectangle that acts as our background
             background.addChild(backgroundFill); //adds the background to the cavas so we can see it
             
             // TODO: 3 - Add a moon and starfield
@@ -51,7 +51,7 @@ var background = function (window) {
             
             // everytime the loops runs it craets a circle with a random x and y respective to the canvas and is added to the background
             for (var i =0; i <= 100; i++ ){
-                var circle = draw.circle(3,'white','LightGray',2); //creates a variable called circle that holds each circle
+                var circle = draw.circle(3,'yellow','LightGray',2); //creates a variable called circle that holds each circle
                 circle.x = canvasWidth*Math.random(); //multiplies cavasWidth * a random decimal between .1 and .99 and assigns it the circle.x
                 circle.y = groundY*Math.random(); //multiplies groundY * with a random decimal between .1 and .99 and assigns it the circle.y
                 background.addChild(circle); //adds the circle to the background
@@ -62,7 +62,7 @@ var background = function (window) {
              //everytime this loop runs, it creates a building with an x and y value and pushes it to the buildings array
             for(var i = 0; i < 10; i++) {
                 var buildingHeights = [300, 200, 100, 400, 350];
-                var colors = ["red", "blue", "grey", "black", "purple"]
+                var colors = ["black", "blue", "grey", "purple", "black"] //an array the hold the colors of the buildings
                 var buildingHeight = 300; //declare a variable called buildingHeight that holds the height of the building in pixels
                 var building = draw.rect(75, buildingHeights[i],colors[i],'Black',1); //declares a variable called building which will hold each building
                 building.x = 500 + 200*i; //adds 200 pixels to the x value every time the loop runs
@@ -72,10 +72,10 @@ var background = function (window) {
             }
             
             // TODO 4: Part 1 - Add a tree
-            tree = draw.bitmap('img/tree.png');
-            tree.x = canvasWidth - 300;
-            tree.y = groundY - 235;
-            background.addChild(tree);
+            tree = draw.bitmap('img/barbed wire.png'); //a variable called tree that holds the image tree/barbed wire
+            tree.x = canvasWidth - 300; //the x-value of the tree 
+            tree.y = groundY - 130; //the y-value of the tree
+            background.addChild(tree); //adds the tree to the background
             
         } // end of render function - DO NOT DELETE
         
@@ -96,7 +96,8 @@ var background = function (window) {
                 tree.x = canvasWidth;
             }
             
-            // TODO 5: Part 2 - Parallax
+            // TODO 5: Part 2 - Parallax 
+            //a for loop that animates the buildings so that they move towards Halle using an array made for buildings.
             for (var i = 0; i < buildings.length; i++){
                 buildings[i].x = buildings[i].x - 2;
                 if(buildings[i].x < 0) {
