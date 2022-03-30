@@ -15,18 +15,12 @@ var level01 = function (window) {
             "name": "Deserted City",
             "number": 1, 
             "speed": -3,
-            "gameItems": [
-            {"type": "sawblade", "x": 400, "y": groundY - 50},
-            { "type": "sawblade", "x": 600, "y": groundY - 50},
-            { "type": "sawblade", "x": 800, "y": groundY - 50},
-            
-            { "type": "enemy", "x": 500, "y": groundY - 50 },
-            { "type": "enemy", "x": 700, "y": groundY - 50},
-            { "type": "enemy", "x": 900, "y": groundY - 50},
+            "gameItems": [  
+            {"type": "sawblade", "x": 726, "y": groundY - 120},
 
-            { "type": "reward", "x": 200, "y": groundY - 50 },
-            { "type": "reward", "x": 300, "y": groundY - 50},
-            { "type": "reward", "x": 1000, "y": groundY - 50},
+            { "type": "enemy", "x": 860, "y": groundY - 60 },
+
+            { "type": "reward", "x": 2100, "y": groundY - 50 },
             ]
         };
         window.levelData = levelData;
@@ -54,14 +48,14 @@ var level01 = function (window) {
 
         function createEnemy(x, y){
             var enemy = game.createGameItem('enemy',25);// creates the enemy game item and stores it in the variable enemy
-            var enemyImage = draw.bitmap('img/Kunai Knife.png'); // draws the image and stores it in the variable enemyImage
+            var enemyImage = draw.bitmap('img/shuriken.png'); // draws the image and stores it in the variable enemyImage
             enemyImage.x = -25; // align the image with the hitzone x
             enemyImage.y = -25; // align the image with the hitzone y
             enemy.addChild(enemyImage); // adds the enemy 
             enemy.x = x; //the x value of the enemy 
             enemy.y = y; //the x value of the enemy 
             game.addGameItem(enemy); // adds the enemy
-            enemy.velocityX = -1; // move the enemy 1 pixel to the left
+            enemy.velocityX = -2; // move the enemy 1 pixel to the left
             enemy.rotationalVelocity = 10; // rotate the enemy image by 10 pixels
 
             //this function detects if the enemy collides with Halle and executes health decrease
@@ -86,11 +80,11 @@ var level01 = function (window) {
             reward.x = x; //the x value of the reward 
             reward.y = y; //the x value of the reward 
             game.addGameItem(reward); // adds the reward
-            reward.velocityX = -1; // move the reward 1 pixel to the left
+            reward.velocityX = -2; // move the reward 1 pixel to the left
 
             //this function detects if the reward collides with Halle and executes health decrease
             reward.onPlayerCollision = function() {
-                game.changeIntegrity(50); //decreases your health
+                game.changeIntegrity(100); //decreases your health
                 console.log('The reward has hit Halle');
                 reward.shrink(); //when hits Halle reward disapears or shrinks
             };
