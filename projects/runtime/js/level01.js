@@ -22,12 +22,71 @@ var level01 = function (window) {
             {"type": "sawblade", "x": 1300, "y": groundY - 30},
             {"type": "sawblade", "x": 1514, "y": groundY - 120},
             {"type": "sawblade", "x": 1850, "y": groundY - 40},
+            
+            //level 2 Sawblade
+            {"type": "sawblade", "x": 2336, "y": groundY - 30},
+            {"type": "sawblade", "x": 2510, "y": groundY - 120},
+            {"type": "sawblade", "x": 2620, "y": groundY - 120},
+            {"type": "sawblade", "x": 2914, "y": groundY - 30},
+            {"type": "sawblade", "x": 3120, "y": groundY - 120},
+            {"type": "sawblade", "x": 3314, "y": groundY - 30},
+            {"type": "sawblade", "x": 3550, "y": groundY - 40},
+           
+            //level 3 Sawblade
+            {"type": "sawblade", "x": 4346, "y": groundY - 30},
+            {"type": "sawblade", "x": 4610, "y": groundY - 120},
+            {"type": "sawblade", "x": 4720, "y": groundY - 120},
+            {"type": "sawblade", "x": 5014, "y": groundY - 30},
+            {"type": "sawblade", "x": 5314, "y": groundY - 30},
+            {"type": "sawblade", "x": 5550, "y": groundY - 120},
+            {"type": "sawblade", "x": 5714, "y": groundY - 40},
+
+            //level 4 Sawblade
+            {"type": "sawblade", "x": 6246, "y": groundY - 120},
+            {"type": "sawblade", "x": 6510, "y": groundY - 40},
+            {"type": "sawblade", "x": 6820, "y": groundY - 40},
+            {"type": "sawblade", "x": 7014, "y": groundY - 120},
+            {"type": "sawblade", "x": 7314, "y": groundY - 30},
+            {"type": "sawblade", "x": 7550, "y": groundY - 120},
+            {"type": "sawblade", "x": 7764, "y": groundY - 40},
+
+            //level 5 Sawblade
+            {"type": "sawblade", "x": 8246, "y": groundY - 120},
+            {"type": "sawblade", "x": 8510, "y": groundY - 40},
+            {"type": "sawblade", "x": 8820, "y": groundY - 40},
+            {"type": "sawblade", "x": 9014, "y": groundY - 120},
+            {"type": "sawblade", "x": 9314, "y": groundY - 30},
+            {"type": "sawblade", "x": 9550, "y": groundY - 120},
+            {"type": "sawblade", "x": 9764, "y": groundY - 40},
+            
             //level 1 Enemy
-            { "type": "enemy", "x": 860, "y": groundY - 60 },
-            { "type": "enemy", "x": 1650, "y": groundY - 70 },
-            { "type": "enemy", "x": 1950, "y": groundY - 30 },
+            { "type": "enemy", "x": 890, "y": groundY - 60 },
+            { "type": "enemy", "x": 1690, "y": groundY - 60 },
+
+            //level 2 Enemy
+            { "type": "enemy", "x": 2750, "y": groundY - 50 },
+
+            //level 3 Enemy
+            { "type": "enemy", "x": 4650, "y": groundY - 50 },
+            { "type": "enemy", "x": 4850, "y": groundY - 50 },
+
+           //level 2 Spikes
+            {"type": "spikes", "x": 3820, "y": groundY - 20},
+            //level 3 Spikes
+            {"type": "spikes", "x": 5920, "y": groundY - 20},
+            //level 4 Spikes
+            {"type": "spikes", "x": 7920, "y": groundY - 20},
+
             //level 1 Reward
             { "type": "reward", "x": 2100, "y": groundY - 50 },
+            //level 2 Reward
+            { "type": "reward", "x": 4100, "y": groundY - 50 },
+            //level 3 Reward 
+            { "type": "reward", "x": 6100, "y": groundY - 50 },
+            //level 4 Reward
+            { "type": "reward", "x": 8100, "y": groundY - 50 },
+            //level 5 Reward
+            { "type": "reward", "x": 10000, "y": groundY - 50 },
             ]
         };
         window.levelData = levelData;
@@ -52,6 +111,20 @@ var level01 = function (window) {
             sawBladeHitZone.rotationalVelocity = 10; // rotate the enemy image by 10 pixels
         }
 
+        function createSpikes(x,y){
+            var hitZoneSize = 25; //creates the size of the hitzone
+            var damageFromObstacle = 5; //setting how much damage the obstacle causes on impact
+            var spikesHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); //creates the obstacle itself
+            spikesHitZone.x = x; //the x value of the hitzone
+            spikesHitZone.y = y; //the y value of the hitzone
+            game.addGameItem(spikesHitZone); //adds the hitzone to the game   
+        
+            var obstacleImage = draw.bitmap('img/pixel-spikes.png'); //draws the image and stores it in the variable obstacleImage
+            spikesHitZone.addChild(obstacleImage); //adds the image to the hitzone so you can see it.
+            obstacleImage.x = -110; //lines up the x of the image with the hitzone
+            obstacleImage.y = -70; //lines up the y of the image with the hitzone
+        }
+
 
         function createEnemy(x, y){
             var enemy = game.createGameItem('enemy',25);// creates the enemy game item and stores it in the variable enemy
@@ -67,13 +140,13 @@ var level01 = function (window) {
 
             //this function detects if the enemy collides with Halle and executes health decrease
             enemy.onPlayerCollision = function() {
-                game.changeIntegrity(-10); //decreases your health
+                game.changeIntegrity(15); //decreases your health
                 console.log('The enemy has hit Halle');
                 enemy.shrink(); //when hits Halle enemy disapears or shrinks
             };
             //this function detects if the projectile collides with Halle and it will increase the score and shrink the enemy
             enemy.onProjectileCollision = function(){
-                game.increaseScore(10) //increases the score when enemy detroyed 
+                game.increaseScore(20) //increases the score when enemy detroyed 
                 enemy.shrink(); //how enemy is destroyed
             };
         };
@@ -91,7 +164,7 @@ var level01 = function (window) {
 
             //this function detects if the reward collides with Halle and executes health decrease
             reward.onPlayerCollision = function() {
-                game.changeIntegrity(100); //decreases your health
+                game.changeIntegrity(100); //increases your health
                 console.log('The reward has hit Halle');
                 reward.shrink(); //when hits Halle reward disapears or shrinks
             };
@@ -109,13 +182,16 @@ var level01 = function (window) {
             if (gameItem.type === "sawblade"){
                 createSawBlade(gameItem.x, gameItem.y);
             }
-            
+            if (gameItem.type === "spikes"){
+                createSpikes(gameItem.x, gameItem.y);
+            }
             if (gameItem.type === "enemy"){
                 createEnemy(gameItem.x, gameItem.y);
             }
             if (gameItem.type === "reward"){
                 createReward(gameItem.x, gameItem.y);
             }
+
         }
 
 
