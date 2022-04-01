@@ -91,7 +91,7 @@ var level01 = function (window) {
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(true);
+        game.setDebugMode(false);
 
         // TODO 6 and on go here
         // BEGIN EDITING YOUR CODE HERE
@@ -109,6 +109,17 @@ var level01 = function (window) {
             obstacleImage.x = -25; //lines up the x of the image with the hitzone
             obstacleImage.y = -25; //lines up the y of the image with the hitzone
             sawBladeHitZone.rotationalVelocity = 10; // rotate the enemy image by 10 pixels
+             //this function detects if the enemy collides with Halle and executes health decrease
+                sawBladeHitZone.onPlayerCollision = function() {
+                game.changeIntegrity(-15); //decreases your health
+                console.log('The enemy has hit Halle');
+                sawBladeHitZone.shrink(); //when hits Halle enemy disapears or shrinks
+            };
+            //this function detects if the projectile collides with Halle and it will increase the score and shrink the enemy
+            sawBladeHitZone.onProjectileCollision = function(){
+                game.increaseScore(20) //increases the score when enemy detroyed 
+                sawBladeHitZone.shrink(); //how enemy is destroyed
+            };
         }
 
         function createSpikes(x,y){
@@ -140,7 +151,7 @@ var level01 = function (window) {
 
             //this function detects if the enemy collides with Halle and executes health decrease
             enemy.onPlayerCollision = function() {
-                game.changeIntegrity(15); //decreases your health
+                game.changeIntegrity(-15); //decreases your health
                 console.log('The enemy has hit Halle');
                 enemy.shrink(); //when hits Halle enemy disapears or shrinks
             };
@@ -175,7 +186,7 @@ var level01 = function (window) {
             };
         };
 
-
+        //a for loop that iterates through the levelData.gameItems Array, during each loop a function is called for either enemy, obstacle, or reward using each objects.x and .y properties as arguments will allow for the items to appear on screen
         for (var i = 0; i < levelData.gameItems.length; i++){
             var gameItem = levelData.gameItems[i];
             
